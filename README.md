@@ -1,0 +1,4 @@
+Joker
+-----
+
+A virtual package.
