@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 # DO NOT import your package from your setup.py
 
 
-def readfile(filename):
+def read(filename):
     with open(filename) as f:
         return f.read()
 
@@ -18,7 +18,7 @@ config = {
     'version': '0.0.2',
     'description': "A virtual package",
     'keywords': 'joker',
-    'url': "",
+    'url': "https://github.com/frozflame/joker",
     'author': 'frozflame',
     'author_email': 'frozflame@outlook.com',
     'license': "GNU General Public License (GPL)",
