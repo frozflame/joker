@@ -25,7 +25,7 @@ config = {
     'packages': find_packages(),
     'namespace_packages': ["joker"],
     'zip_safe': False,
-    # 'install_requires': readfile("requirements.txt"),
+    'install_requires': read("requirements.txt"),
     'classifiers': [
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
