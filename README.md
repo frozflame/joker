@@ -1,4 +1,4 @@
-Joker
------
+joker
+=====
 
-A virtual package.
+A placeholder package to stop IDEs from complaint.

@@ -15,8 +15,8 @@ def read(filename):
 
 config = {
     'name': "joker",
-    'version': '0.0.5',
-    'description': "A virtual package",
+    'version': '0.0.6',
+    'description': "A placeholder package to stop IDEs from complaint",
     'keywords': 'joker',
     'url': "https://github.com/frozflame/joker",
     'author': 'frozflame',
