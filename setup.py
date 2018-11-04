@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+import os
+import re
+
 from setuptools import setup, find_packages
 
 
@@ -8,21 +11,41 @@ from setuptools import setup, find_packages
 # DO NOT import your package from your setup.py
 
 
+package_name = 'place'
+description = "Locate joker project directory"
+
+
 def read(filename):
     with open(filename) as f:
         return f.read()
 
 
+def version_find():
+    root = os.path.dirname(__file__)
+    path = os.path.join(root, 'joker/{}/__init__.py'.format(package_name))
+    regex = re.compile(
+        r'''^__version__\s*=\s*('|"|'{3}|"{3})([.\w]+)\1\s*(#|$)''')
+    with open(path) as fin:
+        for line in fin:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            mat = regex.match(line)
+            if mat:
+                return mat.groups()[1]
+    raise ValueError('__version__ definition not found')
+
+
 config = {
     'name': "joker",
-    'version': '0.0.6',
-    'description': "A placeholder package to stop IDEs from complaint",
+    'version': version_find(),
+    'description': description,
     'keywords': 'joker',
     'url': "https://github.com/frozflame/joker",
     'author': 'frozflame',
     'author_email': 'frozflame@outlook.com',
     'license': "GNU General Public License (GPL)",
-    'packages': find_packages(),
+    'packages': find_packages(exclude=['test_*']),
     'namespace_packages': ["joker"],
     'zip_safe': False,
     'install_requires': read("requirements.txt"),
