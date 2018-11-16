@@ -3,7 +3,7 @@
 
 from __future__ import unicode_literals
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 import os
 import sys
@@ -60,5 +60,3 @@ def make_joker_dir():
     d = under_joker_dir()
     if not os.path.isdir(d):
         os.mkdir(d, int('700', 8))
-
-

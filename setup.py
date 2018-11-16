@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 # DO NOT import your package from your setup.py
 
 
-package_name = 'place'
+package_name = 'default'
 description = "Locate joker project directory"
 
 
