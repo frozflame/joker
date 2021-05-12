@@ -3,7 +3,7 @@
 
 from __future__ import unicode_literals
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 import os
 import sys
@@ -55,8 +55,9 @@ def under_joker_dir(*paths):
     return os.path.join(p, *paths)
 
 
-def make_joker_dir():
+def make_joker_dir(*paths):
     # silently return if userdir_path exists as a dir
-    d = under_joker_dir()
+    d = under_joker_dir(*paths)
     if not os.path.isdir(d):
-        os.mkdir(d, int('700', 8))
+        os.makedirs(d, int('700', 8), exist_ok=True)
+    return d
