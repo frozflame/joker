@@ -45,7 +45,7 @@ config = {
     'author': 'frozflame',
     'author_email': 'frozflame@outlook.com',
     'license': "GNU General Public License (GPL)",
-    'packages': find_namespace_packages(include=['joker.default']),
+    'packages': find_namespace_packages(include=['joker.*']),
     'namespace_packages': ["joker"],
     'zip_safe': False,
     'install_requires': read("requirements.txt"),
