@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 
 from volkanic.utils import under_home_dir, under_package_dir
 
-from joker.enviorn import under_joker_dir, make_joker_dir, __version__
-from joker.enviorn.utils import load_modules_under_package
+from joker.environ import under_joker_dir, make_joker_dir, __version__
+from joker.environ.utils import load_modules_under_package
 
 __all__ = [
     'under_home_dir',
