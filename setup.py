@@ -11,7 +11,7 @@ from setuptools import setup, find_namespace_packages
 # DO NOT import your package from your setup.py
 
 
-package_name = 'default'
+package_name = 'environ'
 description = "Locate joker project directory"
 
 

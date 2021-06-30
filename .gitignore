@@ -74,8 +74,4 @@ alembic.ini
 # temp results
 a.*
 
-# just as local reference
-zombies/*
-
-# quick and dirty jobs
-run.sh
+_local
