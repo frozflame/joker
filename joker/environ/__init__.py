@@ -10,15 +10,31 @@ from volkanic.compat import cached_property
 
 class GlobalInterface(volkanic.GlobalInterface):
     package_name = 'joker.environ'
+    _meta = {}
 
-    @cached_property
-    def _joker_dir(self):
-        path = os.environ.get('JOKER_HOME', self.under_home_dir('.joker'))
-        os.makedirs(path, int('700', 8), exist_ok=True)
-        return path
+    @classmethod
+    def under_joker_dir(cls, *paths):
+        path = os.environ.get('JOKER_HOME', cls.under_home_dir('.joker'))
+        if not cls._meta.get('joker_dir_made'):
+            os.makedirs(path, int('700', 8), exist_ok=True)
+            cls._meta['joker_dir_made'] = True
+        return os.path.join(path, *paths)
 
-    def under_joker_dir(self, *paths):
-        return os.path.join(self._joker_dir, *paths)
+    @classmethod
+    def _get_conf_paths(cls):
+        """
+        Make sure this method can be called without arguments.
+        Override this method in your subclasses for your specific project.
+        """
+        assert cls.package_name.startswith('joker.')
+        subpkg_name = cls.package_name[6:]
+        assert subpkg_name
+        return [
+            cls.under_joker_dir('{}/config.json5'.format(subpkg_name)),
+            '/etc/joker/{}/config.json5'.format(subpkg_name),
+        ]
+
+    _get_conf_search_paths = None
 
 
 __gi = GlobalInterface()
