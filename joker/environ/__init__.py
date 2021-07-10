@@ -5,7 +5,6 @@ __version__ = '0.2.3!'
 import os
 
 import volkanic
-from volkanic.compat import cached_property
 
 
 class GlobalInterface(volkanic.GlobalInterface):
@@ -26,7 +25,8 @@ class GlobalInterface(volkanic.GlobalInterface):
         Make sure this method can be called without arguments.
         Override this method in your subclasses for your specific project.
         """
-        assert cls.package_name.startswith('joker.')
+        if not cls.package_name.startswith('joker.'):
+            return super()._get_conf_paths()
         subpkg_name = cls.package_name[6:]
         assert subpkg_name
         return [
