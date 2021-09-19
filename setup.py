@@ -6,13 +6,12 @@ import re
 
 from setuptools import setup, find_namespace_packages
 
-
 # import joker; exit(1)
 # DO NOT import your package from your setup.py
 
 
 package_name = 'environ'
-description = "Locate joker project directory"
+description = 'Base classes and utilities for a joker-style project skeleton.'
 
 
 def read(filename):

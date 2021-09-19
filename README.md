@@ -1,7 +1,7 @@
 joker
 =====
 
-Locate joker project directory.
+Base classes and utilities for a joker-style project skeleton.
 
 
 Other projects under `joker` namespace by the same author:
