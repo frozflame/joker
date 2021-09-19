@@ -4,10 +4,10 @@
 import os
 
 import volkanic
-from volkanic.environ import GIMixinDirs
+from volkanic import utils
 
 
-class GlobalInterface(volkanic.GlobalInterface, GIMixinDirs):
+class GlobalInterface(volkanic.GlobalInterface):
     package_name = 'joker.environ'
     _meta = {}
 
@@ -36,4 +36,32 @@ class GlobalInterface(volkanic.GlobalInterface, GIMixinDirs):
             '/etc/joker/{}/config.json5'.format(subpkg_name),
         ]
 
+    def _under_data_dir(self, conf_key, *paths, mkdirs=False) -> str:
+        dirpath = self.conf[conf_key]
+        if not mkdirs:
+            return utils.abs_path_join(dirpath, *paths)
+        return utils.abs_path_join_and_mkdirs(dirpath, *paths)
+
+    def under_data_dir(self, *paths, mkdirs=False) -> str:
+        return self._under_data_dir('data_dir', *paths, mkdirs=mkdirs)
+
+    def _under_resources_dir(self, conf_key, default, *paths) -> str:
+        dirpath = self.conf.get(conf_key)
+        if not dirpath:
+            dirpath = self.under_project_dir(default)
+        if not dirpath or not os.path.isdir(dirpath):
+            raise NotADirectoryError(dirpath)
+        return utils.abs_path_join(dirpath, *paths)
+
+    def under_resources_dir(self, *paths) -> str:
+        f = self._under_resources_dir
+        return f('resources_dir', 'resources', *paths)
+
+    def under_temp_dir(self, ext=''):
+        name = os.urandom(17).hex() + ext
+        return self.under_data_dir('tmp', name, mkdirs=True)
+
+    # both will be removed
+    get_temp_path = under_temp_dir
+    under_temp_path = under_temp_dir
     _get_conf_search_paths = None
