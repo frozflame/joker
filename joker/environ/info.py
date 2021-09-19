@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
+
 packages = [
     'joker.aligner',
     'joker.broker',
@@ -10,12 +11,14 @@ packages = [
     'joker.masquerade',
     'joker.minions',
     'joker.pyoneliner',
+    'joker.relational',
     'joker.scraper',
     'joker.stream',
     'joker.studio',
     'joker.textmanip',
     'joker.xopen'
 ]
+
 projects = [
     'joker-aligner',
     'joker-broker',
@@ -26,6 +29,7 @@ projects = [
     'joker-masquerade',
     'joker-minions',
     'joker-pyoneliner',
+    'joker-relational',
     'joker-scraper',
     'joker-stream',
     'joker-studio',
