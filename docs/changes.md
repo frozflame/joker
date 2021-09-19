@@ -1,6 +1,10 @@
 Changes of joker
 ----------------
 
+### version 0.2.4
+* Generic `GlobalInterface` for public usage
+* A separate `JokerInterface` for joker series projects
+
 ### version 0.2.0
 Rename `j.place` to `j.default`
 
