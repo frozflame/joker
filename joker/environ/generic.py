@@ -11,7 +11,7 @@ class GlobalInterface(volkanic.GlobalInterface, GIMixinDirs):
     package_name = 'joker.environ'
     _meta = {}
 
-    # this method will be moved to JokerInterface
+    # this method will be moved to JokerInterface at ver 0.3.0
     @classmethod
     def under_joker_dir(cls, *paths):
         path = os.environ.get('JOKER_HOME', cls.under_home_dir('.joker'))
@@ -20,6 +20,7 @@ class GlobalInterface(volkanic.GlobalInterface, GIMixinDirs):
             cls._meta['joker_dir_made'] = True
         return os.path.join(path, *paths)
 
+    # this method will be moved to JokerInterface at ver 0.3.0
     @classmethod
     def _get_conf_paths(cls):
         """
@@ -36,6 +37,3 @@ class GlobalInterface(volkanic.GlobalInterface, GIMixinDirs):
         ]
 
     _get_conf_search_paths = None
-
-
-
