@@ -36,26 +36,19 @@ class GlobalInterface(volkanic.GlobalInterface):
             '/etc/joker/{}/config.json5'.format(subpkg_name),
         ]
 
-    def _under_data_dir(self, conf_key, *paths, mkdirs=False) -> str:
-        dirpath = self.conf[conf_key]
+    def under_data_dir(self, *paths, mkdirs=False) -> str:
+        dirpath = self.conf['data_dir']
         if not mkdirs:
             return utils.abs_path_join(dirpath, *paths)
         return utils.abs_path_join_and_mkdirs(dirpath, *paths)
 
-    def under_data_dir(self, *paths, mkdirs=False) -> str:
-        return self._under_data_dir('data_dir', *paths, mkdirs=mkdirs)
-
-    def _under_resources_dir(self, conf_key, default, *paths) -> str:
-        dirpath = self.conf.get(conf_key)
+    def under_resources_dir(self, *paths) -> str:
+        dirpath = self.conf.get('resources_dir')
         if not dirpath:
-            dirpath = self.under_project_dir(default)
+            dirpath = self.under_project_dir('resources')
         if not dirpath or not os.path.isdir(dirpath):
             raise NotADirectoryError(dirpath)
         return utils.abs_path_join(dirpath, *paths)
-
-    def under_resources_dir(self, *paths) -> str:
-        f = self._under_resources_dir
-        return f('resources_dir', 'resources', *paths)
 
     def under_temp_dir(self, ext=''):
         name = os.urandom(17).hex() + ext
