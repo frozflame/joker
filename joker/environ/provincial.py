@@ -42,6 +42,9 @@ projects = [
 
 class JokerInterface(GlobalInterface):
     package_name = 'joker.environ'
+    _options = {
+        'namespaced_config_path': True
+    }
 
 
 ji = JokerInterface()
