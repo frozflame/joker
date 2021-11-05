@@ -42,8 +42,13 @@ projects = [
 
 class JokerInterface(GlobalInterface):
     package_name = 'joker.environ'
+
+    @classmethod
+    def _get_conf_path_names(cls):
+        return [cls.project_name, cls._get_option('confpath_filename')]
+
     _options = {
-        'namespaced_config_path': True
+        'confpath_dirname_sep': '/',
     }
 
 
