@@ -3,12 +3,11 @@
 
 import os
 
-import volkanic
-from volkanic import utils
+import volkanic.environ
 from volkanic.compat import cached_property
 
 
-class GlobalInterface(volkanic.GlobalInterface):
+class GlobalInterface(volkanic.environ.GlobalInterfacePlus):
     package_name = 'joker.environ'
     default_config = {}
     _meta = {}
@@ -21,20 +20,6 @@ class GlobalInterface(volkanic.GlobalInterface):
             os.makedirs(path, int('700', 8), exist_ok=True)
             cls._meta['joker_dir_made'] = True
         return os.path.join(path, *paths)
-
-    def under_data_dir(self, *paths, mkdirs=False) -> str:
-        dirpath = self.conf['data_dir']
-        if not mkdirs:
-            return utils.abs_path_join(dirpath, *paths)
-        return utils.abs_path_join_and_mkdirs(dirpath, *paths)
-
-    def under_resources_dir(self, *paths) -> str:
-        dirpath = self.conf.get('resources_dir')
-        if not dirpath:
-            dirpath = self.under_project_dir('resources')
-        if not dirpath or not os.path.isdir(dirpath):
-            raise NotADirectoryError(dirpath)
-        return utils.abs_path_join(dirpath, *paths)
 
     def under_temp_dir(self, ext=''):
         name = os.urandom(17).hex() + ext
