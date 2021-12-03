@@ -1,3 +1,4 @@
 volkanic~=0.3.7
 requests~=2.24.0
 setuptools~=57.0.0
+joker-stream~=0.4.2

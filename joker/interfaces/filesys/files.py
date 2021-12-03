@@ -20,12 +20,14 @@ def b64_encode_local_file(path: str):
         return b64_encode_data_url(mediatype, fin.read())
 
 
-class FileStorageInterface:
-    def __init__(self, base_dir: str):
-        self.base_dir = os.path.abspath(base_dir)
+class DirectoryInterface:
+    def __init__(self, path: str):
+        self.base_dir = os.path.abspath(path)
 
-    def under_base_dir(self, *paths):
+    def under(self, *paths):
         return os.path.join(self.base_dir, *paths)
+
+    under_base_dir = under
 
     def read_as_chunks(self, path: str, length=-1, offset=0, chunksize=65536) \
             -> Generator[bytes, None, None]:
@@ -55,7 +57,10 @@ class FileStorageInterface:
                 fout.write(chunk)
 
 
+FileStorageInterface = DirectoryInterface
+
 __all__ = [
+    'DirectoryInterface',
     'FileStorageInterface',
     'b64_encode_data_url',
     'b64_encode_local_file',
