@@ -1,28 +1,22 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import base64
-import mimetypes
 import os.path
 from typing import Generator
 
-from joker.stream.utils import read_as_chunks, checksum_hexdigest
-
-
-def b64_encode_data_url(mediatype: str, content: bytes):
-    b64 = base64.b64encode(content).decode('ascii')
-    return 'data:{};base64,{}'.format(mediatype, b64)
-
-
-def b64_encode_local_file(path: str):
-    mediatype = mimetypes.guess_type(path)[0]
-    with open(path, 'rb') as fin:
-        return b64_encode_data_url(mediatype, fin.read())
+from joker.filesys.utils import (
+    read_as_chunks, checksum_hexdigest,
+    b64_encode_local_file,
+)
 
 
 class DirectoryInterface:
     def __init__(self, path: str):
         self.base_dir = os.path.abspath(path)
+
+    def __repr__(self):
+        cn = self.__class__.__name__
+        return '{}({})'.format(cn, repr(self.base_dir))
 
     def under(self, *paths):
         return os.path.join(self.base_dir, *paths)
@@ -61,7 +55,4 @@ FileStorageInterface = DirectoryInterface
 
 __all__ = [
     'DirectoryInterface',
-    'FileStorageInterface',
-    'b64_encode_data_url',
-    'b64_encode_local_file',
 ]
