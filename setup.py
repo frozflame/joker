@@ -9,8 +9,6 @@ from setuptools import setup, find_namespace_packages
 # import joker; exit(1)
 # DO NOT import your package from your setup.py
 
-
-package_name = 'environ'
 description = 'Base classes and utilities for a joker-style project skeleton.'
 
 
@@ -21,7 +19,7 @@ def read(filename):
 
 def version_find():
     root = os.path.dirname(__file__)
-    path = os.path.join(root, 'joker/{}/__init__.py'.format(package_name))
+    path = os.path.join(root, 'joker/interfaces/__init__.py')
     regex = re.compile(
         r'''^__version__\s*=\s*('|"|'{3}|"{3})([.\w]+)\1\s*(#|$)''')
     with open(path) as fin:
