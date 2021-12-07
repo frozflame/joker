@@ -7,7 +7,7 @@ import subprocess
 from glob import glob
 from typing import List
 
-from joker.interfaces.filesys.files import DirectoryInterface
+from joker.interfaces.files import DirectoryInterface
 
 
 class Repository(DirectoryInterface):
