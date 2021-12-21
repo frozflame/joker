@@ -16,8 +16,8 @@ class Directory:
         self.base_dir = os.path.abspath(base_dir)
 
     def __repr__(self):
-        cn = self.__class__.__name__
-        return '{}({})'.format(cn, repr(self.base_dir))
+        c = self.__class__.__name__
+        return '{}({!r})'.format(c, self.base_dir)
 
     def under(self, *paths):
         return os.path.join(self.base_dir, *paths)
@@ -66,15 +66,32 @@ class MappedDirectory(Directory):
             base_url += '/'
         self.base_url = base_url
 
+    def __repr__(self):
+        c = self.__class__.__name__
+        return '{}({!r}, {!r})'.format(c, self.base_dir, self.base_url)
+
+    def join_url(self, path: str):
+        return urllib.parse.urljoin(self.base_url, path)
+
     def relative_to_base_url(self, url: str):
         base_url_path = urllib.parse.urlparse(self.base_url).path
         url_path = urllib.parse.urlparse(url).path
         return os.path.relpath(url_path, base_url_path)
+
+    def convert_local_path_to_url(self, path: str):
+        path = os.path.abspath(path)
+        path = self.relative_to_base_dir(path)
+        return self.join_url(path)
+
+    def convert_url_to_local_path(self, url: str):
+        path = self.relative_to_base_url(url)
+        return self.under(path)
 
 
 DirectoryInterface = Directory
 FileStorageInterface = Directory
 
 __all__ = [
-    'DirectoryInterface',
+    'Directory',
+    'MappedDirectory',
 ]
