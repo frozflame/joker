@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import os.path
+import urllib.parse
 from typing import Generator
 
 from joker.filesys.utils import (
@@ -10,9 +11,9 @@ from joker.filesys.utils import (
 )
 
 
-class DirectoryInterface:
-    def __init__(self, path: str):
-        self.base_dir = os.path.abspath(path)
+class Directory:
+    def __init__(self, base_dir: str):
+        self.base_dir = os.path.abspath(base_dir)
 
     def __repr__(self):
         cn = self.__class__.__name__
@@ -20,6 +21,10 @@ class DirectoryInterface:
 
     def under(self, *paths):
         return os.path.join(self.base_dir, *paths)
+
+    def relative_to_base_dir(self, path: str):
+        path = os.path.abspath(path)
+        return os.path.relpath(path, self.base_dir)
 
     under_base_dir = under
 
@@ -51,7 +56,24 @@ class DirectoryInterface:
                 fout.write(chunk)
 
 
-FileStorageInterface = DirectoryInterface
+class MappedDirectory(Directory):
+    def __init__(self, base_dir: str, base_url: str):
+        super().__init__(base_dir)
+        # Note:
+        # urllib.parse.urljoin('/a/b', 'c.jpg') => '/a/c.jpg'
+        # urllib.parse.urljoin('/a/b/', 'c.jpg') => '/a/b/c.jpg'
+        if not base_url.endswith('/'):
+            base_url += '/'
+        self.base_url = base_url
+
+    def relative_to_base_url(self, url: str):
+        base_url_path = urllib.parse.urlparse(self.base_url).path
+        url_path = urllib.parse.urlparse(url).path
+        return os.path.relpath(url_path, base_url_path)
+
+
+DirectoryInterface = Directory
+FileStorageInterface = Directory
 
 __all__ = [
     'DirectoryInterface',
