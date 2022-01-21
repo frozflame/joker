@@ -6,7 +6,7 @@ import importlib
 
 from volkanic.introspect import find_all_plain_modules
 
-from joker.environ.provincial import JokerInterface
+from joker.interfaces.meta import JokerInterface
 
 ji = JokerInterface()
 

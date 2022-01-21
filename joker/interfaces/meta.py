@@ -82,10 +82,5 @@ def get_joker_packages(use_pkgutil=False):
         return _get_joker_packages()
 
 
-# deprecated
-def make_joker_dir(*paths):
-    return under_joker_dir(*paths)
-
-
 def under_joker_dir(*paths):
     return ji.under_joker_dir(*paths)

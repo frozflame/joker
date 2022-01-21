@@ -3,8 +3,8 @@
 
 import hashlib
 
-from joker.environ import utils
-from joker.filesys.utils import checksum
+from joker.interfaces import utils
+from joker.interfaces.filesys import checksum
 
 
 def test_multicheck():

@@ -7,10 +7,10 @@ import subprocess
 from glob import glob
 from typing import List
 
-from joker.interfaces.files import DirectoryInterface
+from joker.interfaces.filesys import Directory
 
 
-class Repository(DirectoryInterface):
+class Repository(Directory):
     def __init__(self, path: str):
         dotgit_dir = os.path.join(path, '.git')
         if not os.path.isdir(dotgit_dir):
@@ -56,4 +56,4 @@ class Repository(DirectoryInterface):
         return info
 
 
-GitRepo = Repository
+__all__ = ['Repository']

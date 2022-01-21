@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-from joker.interfaces.files import Directory, MappedDirectory
+from joker.interfaces.filesys import Directory, MappedDirectory
 
 
 def assert_equal(a, b):
