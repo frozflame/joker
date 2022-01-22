@@ -6,6 +6,7 @@ import os
 import volkanic.environ
 from volkanic.compat import cached_property
 
+
 # this is deprecated
 class GlobalInterface(volkanic.environ.GlobalInterfaceTrial):
     package_name = 'joker.environ'
