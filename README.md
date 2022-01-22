@@ -1,7 +1,7 @@
 joker
 =====
 
-Base classes and utilities for a joker-style project skeleton.
+Interfaces for a joker-style project.
 
 
 Other projects under `joker` namespace by the same author:
