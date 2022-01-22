@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from joker.interfaces import __version__
-from joker.interfaces.legacy import GlobalInterface
+from joker.interfaces.meta import GlobalInterface
 
 _names = [GlobalInterface]
 
