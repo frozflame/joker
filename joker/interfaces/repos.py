@@ -3,11 +3,18 @@
 
 import os
 import os.path
+import shlex
 import subprocess
+import sys
 from glob import glob
 from typing import List
 
 from joker.interfaces.filesys import Directory
+
+
+def printcmd(cmd: List[str], **kwargs):
+    kwargs.setdefault('file', sys.stderr)
+    print(*[shlex.quote(s) for s in cmd], **kwargs)
 
 
 class Repository(Directory):
@@ -21,7 +28,7 @@ class Repository(Directory):
         return self.under('.git', *paths)
 
     @classmethod
-    def find(cls, path: str) -> List['GitRepo']:
+    def find(cls, path: str) -> List['Repository']:
         pattern = os.path.join(path, '*', '.git')
         dotgit_paths = glob(pattern)
         for dotgit_path in dotgit_paths:
@@ -29,6 +36,11 @@ class Repository(Directory):
                 yield cls(os.path.split(dotgit_path)[0])
             except NotADirectoryError:
                 continue
+
+    def pull(self):
+        cmd = ['git', 'pull']
+        printcmd(cmd)
+        subprocess.run(cmd, cwd=self.base_dir)
 
     def check_command(self, cmd: list):
         sp = subprocess.run(cmd, cwd=self.base_dir, capture_output=True)
