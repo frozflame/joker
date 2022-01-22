@@ -1,8 +1,7 @@
 joker
 =====
 
-Interfaces for a joker-style project.
-
+Simple interfaces to local file systems and the network.
 
 Other projects under `joker` namespace by the same author:
 

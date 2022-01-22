@@ -9,7 +9,7 @@ from setuptools import setup, find_namespace_packages
 # import joker; exit(1)
 # DO NOT import your package from your setup.py
 
-description = 'Interfaces for a joker-style project.'
+description = 'Simple interfaces to local file systems and the network.'
 
 
 def read(filename):
