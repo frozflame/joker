@@ -1,6 +1,10 @@
 Changes of joker
 ----------------
 
+### 0.3.2
+* `joker.interfaces` becomes an independent project
+* `joker.meta` package
+
 ### 0.2.6
 * version 0.2.5 is broken and removed from PyPI
 * `joker.interfaces` package

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
+
 import os
 from functools import cached_property
 
@@ -10,11 +11,12 @@ from volkanic.utils import (
     abs_path_join_and_mkdirs,
 )
 
+
 packages = [
     'joker.aligner',
     'joker.broker',
     'joker.cast',
-    'joker.environ',
+    'joker.meta',
     'joker.flasky',
     'joker.geometry',
     'joker.masquerade',
@@ -69,11 +71,11 @@ def _get_joker_packages_with_pkgutil():
 
 # this is deprecated
 class GlobalInterface(volkanic.environ.GlobalInterfaceTrial):
-    package_name = 'joker.environ'
+    package_name = 'joker.meta'
 
 
 class JokerInterface(GlobalInterface):
-    package_name = 'joker.interfaces'
+    package_name = 'joker.meta'
     default_config = {}
 
     def under_temp_dir(self, ext=''):
@@ -109,9 +111,6 @@ class JokerInterface(GlobalInterface):
         return names
 
 
-ji = JokerInterface()
-
-
 def get_joker_packages(use_pkgutil=False):
     if use_pkgutil:
         return _get_joker_packages_with_pkgutil()
@@ -120,4 +119,5 @@ def get_joker_packages(use_pkgutil=False):
 
 
 def under_joker_dir(*paths):
+    ji = JokerInterface()
     return ji.under_joker_dir(*paths)

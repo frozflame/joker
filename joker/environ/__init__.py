@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-from joker.interfaces import __version__
-from joker.interfaces.meta import GlobalInterface
+from joker.meta import __version__
+from joker.meta.environ import GlobalInterface
 
 _names = [GlobalInterface]
 

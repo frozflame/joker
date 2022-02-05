@@ -9,7 +9,7 @@ from setuptools import setup, find_namespace_packages
 # import joker; exit(1)
 # DO NOT import your package from your setup.py
 
-description = 'Simple interfaces to local file systems and the network.'
+description = 'auxiliary tools for joker projects'
 
 
 def read(filename):
@@ -19,7 +19,7 @@ def read(filename):
 
 def version_find():
     root = os.path.dirname(__file__)
-    path = os.path.join(root, 'joker/interfaces/__init__.py')
+    path = os.path.join(root, 'joker/meta/__init__.py')
     regex = re.compile(
         r'''^__version__\s*=\s*('|"|'{3}|"{3})([.\w]+)\1\s*(#|$)''')
     with open(path) as fin:
@@ -49,8 +49,6 @@ config = {
     'classifiers': [
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
