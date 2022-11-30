@@ -3,8 +3,9 @@
 
 import hashlib
 
-from joker.interfaces import utils
-from joker.interfaces.filesys import checksum
+from joker.filesys.utils import checksum
+
+from joker.meta import utils
 
 
 def test_multicheck():
@@ -14,6 +15,7 @@ def test_multicheck():
     assert utils.check_exclusive_prefixes('hello-world', ['world', 'ello'])
     assert utils.check_exclusive_prefixes('hello-world', [])
     assert not utils.check_exclusive_prefixes('hello-world', ['hello', 'ello'])
+
 
 def test_chksum():
     _nonhex_md5 = 'd41d8cd98f00b204e9800998ecf8427e'
@@ -54,7 +56,6 @@ def test_chksum():
 
 if __name__ == '__main__':
     test_chksum()
-
 
 if __name__ == '__main__':
     test_multicheck()
